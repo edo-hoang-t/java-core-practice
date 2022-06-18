@@ -30,6 +30,21 @@ public class DefaultProduct implements Product {
     }
 
     @Override
+    public String getCategoryName() {
+        return categoryName;
+    }
+
+    @Override
+    public double getPrice() {
+        return price;
+    }
+
+    @Override
+    public void setPrice(double price) {
+        this.price = price;
+    }
+
+    @Override
     public String toString() {
         return "Product id=" + id + ", product name=" + productName
                 + ", category name=" + categoryName + ", price=" + price;
