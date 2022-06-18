@@ -4,13 +4,14 @@ import com.edocode.oop.exam.entities.Order;
 import com.edocode.oop.exam.entities.Product;
 
 import java.util.Arrays;
+import java.util.List;
 
 public class DefaultOrder implements Order {
 
     private static final int AMOUNT_OF_DIGITS_IN_CREDIT_CARD_NUMBER = 16;
 
     private String creditCardNumber;
-    private Product[] products;
+    private List<Product> products;
     private int customerId;
 
     @Override
@@ -28,7 +29,7 @@ public class DefaultOrder implements Order {
     }
 
     @Override
-    public void setProducts(Product[] products) {
+    public void setProducts(List<Product> products) {
         this.products = products;
     }
 
@@ -46,6 +47,6 @@ public class DefaultOrder implements Order {
     public String toString() {
         return "Order: customer id - " + this.customerId + "\t" +
                 "credit card number - " + this.creditCardNumber + "\t" +
-                "products - " + Arrays.toString(this.products);
+                "products - " + this.products;
     }
 }

@@ -1,12 +1,14 @@
 package com.edocode.oop.exam.entities;
 
+import java.util.List;
+
 public interface Cart {
 
     boolean isEmpty();
 
     void addProduct(Product productById);
 
-    Product[] getProducts();
+    List<Product> getProducts();
 
     void clear();
 }

@@ -3,7 +3,8 @@ package com.edocode.oop.exam.services.impl;
 import com.edocode.oop.exam.entities.User;
 import com.edocode.oop.exam.services.UserManagementService;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DefaultUserManagementService implements UserManagementService {
 
@@ -12,12 +13,10 @@ public class DefaultUserManagementService implements UserManagementService {
     private static final String NO_ERROR_MESSAGE = "";
     private static final int DEFAULT_USERS_CAPACITY = 10;
     private static DefaultUserManagementService instance;
-    private User[] users;
-    private int userCount;
+    private List<User> users;
 
     {
-        users = new User[DEFAULT_USERS_CAPACITY];
-        userCount = 0;
+        users = new ArrayList<>();
     }
 
     private DefaultUserManagementService() {
@@ -39,11 +38,7 @@ public class DefaultUserManagementService implements UserManagementService {
             return errorMessage;
         }
 
-        if (users.length <= userCount) {
-            users = Arrays.copyOf(users, users.length << 1);
-        }
-
-        users[userCount++] = user;
+        users.add(user);
         return NO_ERROR_MESSAGE;
     }
 
@@ -58,8 +53,8 @@ public class DefaultUserManagementService implements UserManagementService {
     }
 
     @Override
-    public User[] getUsers() {
-        return Arrays.copyOf(users, userCount);
+    public List<User> getUsers() {
+        return this.users;
     }
 
     @Override
@@ -73,7 +68,6 @@ public class DefaultUserManagementService implements UserManagementService {
     }
 
     void clearServiceState() {
-        userCount = 0;
-        users = new User[DEFAULT_USERS_CAPACITY];
+        users.clear();
     }
 }

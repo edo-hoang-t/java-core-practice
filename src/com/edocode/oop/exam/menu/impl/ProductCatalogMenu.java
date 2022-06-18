@@ -7,6 +7,7 @@ import com.edocode.oop.exam.menu.Menu;
 import com.edocode.oop.exam.services.ProductManagementService;
 import com.edocode.oop.exam.services.impl.DefaultProductManagementService;
 
+import java.util.List;
 import java.util.Scanner;
 
 
@@ -69,7 +70,7 @@ public class ProductCatalogMenu implements Menu {
     }
 
     private void printProductsToConsole() {
-        Product[] products = productManagementService.getProducts();
+        List<Product> products = productManagementService.getProducts();
         for (Product product : products) {
             System.out.println(product);
         }

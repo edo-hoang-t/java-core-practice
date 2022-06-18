@@ -3,22 +3,24 @@ package com.edocode.oop.exam.entities.impl;
 import com.edocode.oop.exam.entities.Cart;
 import com.edocode.oop.exam.entities.Product;
 
+import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.List;
 
 public class DefaultCart implements Cart {
 
     private static final int DEFAULT_PRODUCT_CAPACITY = 10;
-    private Product[] products;
+    private List<Product> products;
     private int lastIndex;
 
     {
-        products = new Product[DEFAULT_PRODUCT_CAPACITY];
+        products = new ArrayList<>();
         lastIndex = 0;
     }
 
     @Override
     public boolean isEmpty() {
-        return (products == null) || (products.length == 0) || products[0] == null;
+        return (products == null) || (products.isEmpty()) || products.get(0) == null;
     }
 
     @Override
@@ -26,19 +28,16 @@ public class DefaultCart implements Cart {
         if (productById == null) {
             return;
         }
-        if (products.length <= lastIndex) {
-            products = Arrays.copyOf(products, products.length << 1);
-        }
-        products[lastIndex++] = productById;
+        products.add(productById);
     }
 
     @Override
-    public Product[] getProducts() {
-        return Arrays.copyOf(products, lastIndex);
+    public List<Product> getProducts() {
+        return this.products;
     }
 
     @Override
     public void clear() {
-        products = new Product[DEFAULT_PRODUCT_CAPACITY];
+        products.clear();
     }
 }

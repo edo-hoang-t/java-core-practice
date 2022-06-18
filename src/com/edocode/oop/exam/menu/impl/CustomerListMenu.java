@@ -6,6 +6,8 @@ import com.edocode.oop.exam.menu.Menu;
 import com.edocode.oop.exam.services.UserManagementService;
 import com.edocode.oop.exam.services.impl.DefaultUserManagementService;
 
+import java.util.List;
+
 public class CustomerListMenu implements Menu {
 
     private ApplicationContext context;
@@ -20,9 +22,9 @@ public class CustomerListMenu implements Menu {
     public void start() {
         printMenuHeader();
 
-        User[] users = userManagementService.getUsers();
+        List<User> users = userManagementService.getUsers();
 
-        if (users.length == 0) {
+        if (users.isEmpty()) {
             System.out.println("Unfortunately, there are no customers.");
         } else {
             for (User user : users) {

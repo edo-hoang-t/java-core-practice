@@ -4,16 +4,15 @@ import com.edocode.oop.exam.entities.Order;
 import com.edocode.oop.exam.services.OrderManagementService;
 import com.edocode.oop.exam.services.ProductManagementService;
 
-import java.util.Arrays;
+import java.util.ArrayList;
+import java.util.List;
 
 public class DefaultOrderManagementService implements OrderManagementService {
 
-    private static final int DEFAULT_ORDER_CAPACITY = 10;
-    private int lastIndex;
-    private Order[] orders;
+    private List<Order> orders;
 
     {
-        orders = new Order[DEFAULT_ORDER_CAPACITY];
+        orders = new ArrayList<>();
     }
 
     private static DefaultOrderManagementService instance;
@@ -32,14 +31,11 @@ public class DefaultOrderManagementService implements OrderManagementService {
     public void addOrder(Order order) {
         if (order == null) return;
 
-        if (orders.length <= lastIndex) {
-            orders = Arrays.copyOf(orders, orders.length << 1);
-        }
-        orders[lastIndex++] = order;
+        orders.add(order);
     }
 
     @Override
-    public Order[] getOrdersByUserId(int userId) {
+    public List<Order> getOrdersByUserId(int userId) {
         int amountOfUserOrders = 0;
         for (Order order : orders) {
             if (order != null && order.getCustomerId() == userId) {
@@ -47,24 +43,23 @@ public class DefaultOrderManagementService implements OrderManagementService {
             }
         }
 
-        Order[] userOrders = new Order[amountOfUserOrders];
+        List<Order> userOrders = new ArrayList<>();
 
         int index = 0;
         for (Order order : orders) {
             if (order != null && order.getCustomerId() == userId) {
-                userOrders[index++] = order;
+                userOrders.add(order);
             }
         }
         return userOrders;
     }
 
     @Override
-    public Order[] getOrders() {
-        return Arrays.copyOf(orders, lastIndex);
+    public List<Order> getOrders() {
+        return this.orders;
     }
 
     void clearServiceState() {
-        lastIndex = 0;
-        orders = new Order[DEFAULT_ORDER_CAPACITY];
+        orders.clear();
     }
 }

@@ -6,6 +6,8 @@ import com.edocode.oop.exam.menu.Menu;
 import com.edocode.oop.exam.services.OrderManagementService;
 import com.edocode.oop.exam.services.impl.DefaultOrderManagementService;
 
+import java.util.List;
+
 public class MyOrdersMenu implements Menu {
 
     private ApplicationContext context;
@@ -31,9 +33,9 @@ public class MyOrdersMenu implements Menu {
     }
 
     private void printUserOrdersToConsole() {
-        Order[] loggedInUserOrders = orderManagementService.getOrdersByUserId(context.getLoggedInUser().getId());
+        List<Order> loggedInUserOrders = orderManagementService.getOrdersByUserId(context.getLoggedInUser().getId());
 
-        if (loggedInUserOrders == null || loggedInUserOrders.length == 0) {
+        if (loggedInUserOrders == null || loggedInUserOrders.size() == 0) {
             System.out.println("Unfortunately, you don't have any orders yet. "
                     + "Navigate back to main menu to place a new order");
         } else {

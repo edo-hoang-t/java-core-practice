@@ -2,11 +2,13 @@ package com.edocode.oop.exam.services;
 
 import com.edocode.oop.exam.entities.Order;
 
+import java.util.List;
+
 public interface OrderManagementService {
 
     void addOrder(Order order);
 
-    Order[] getOrdersByUserId(int userId);
+    List<Order> getOrdersByUserId(int userId);
 
-    Order[] getOrders();
+    List<Order> getOrders();
 }
